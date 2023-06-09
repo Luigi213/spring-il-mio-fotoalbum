@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="ISO-8859-1">
+<title>Insert title here</title>
+</head>
+<body>
+	<h1>Benvenuto</h1>
+	<a
+		href="/login"
+		sec:authorize="!isAuthenticated()"
+	>LOGIN</a>
+	<a
+		href="/amministratori/photo"
+		sec:authorize="hasAuthority('AMMINISTRATORI')"
+	>AMMINISTRATORI</a>
+	<a
+		href="/photo"
+		sec:authorize="hasAuthority('SUPERADMIN')"
+	>SUPERADMIN</a>
+</body>
+</html>

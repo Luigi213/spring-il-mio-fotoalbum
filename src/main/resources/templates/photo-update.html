@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="ISO-8859-1">
+<title>Insert title here</title>
+</head>
+<body th:object="${photo}">
+	<h1>Create foto</h1>
+	<form method="POST">
+		<label>titolo</label>
+		<input type="text" name="titolo" th:value="*{titolo}">
+		<label style="color: red" th:if="${errors != null && errors.hasFieldErrors('titolo')}">
+			[[ ${errors.getFieldError('titolo').defaultMessage} ]]
+		</label> 
+		<br>
+		<label>descrizione</label>
+		<input type="text" name="descrizione" th:value="*{descrizione}">
+		<label style="color: red" th:if="${errors != null && errors.hasFieldErrors('descrizione')}">
+			[[ ${errors.getFieldError('descrizione').defaultMessage} ]]
+		</label> 
+		<br>
+		<label>url</label>
+		<input type="text" name="url" th:value="*{url}">
+		<label style="color: red" th:if="${errors != null && errors.hasFieldErrors('url')}">
+			[[ ${errors.getFieldError('url').defaultMessage} ]]
+		</label> 
+		<br>
+		<label>visibile</label>
+		<select name="visibile">
+			<option th:value="false" th:selected="*{visibile} == false" >no</option>  
+			<option th:value="true" th:selected="*{visibile} == true" >si</option> 
+		</select>
+		<label style="color: red" th:if="${errors != null && errors.hasFieldErrors('visibile')}">
+			[[ ${errors.getFieldError('visibile').defaultMessage} ]]
+		</label> 
+		<br>
+		<select name="user" th:value="${photo.user.id}" hidden>
+			<option  th:each="user : ${users}" th:object="${user}" th:selected="${photo.user.id} == *{id}" th:value="*{id}">[[ *{id} ]]</option>
+		</select>
+		<div 
+			th:each="categoria : ${categorias}"
+			th:object="${categoria}">
+			<input th:id="${'categoria-' + categoria.id}" th:value="*{id}" th:checked="${photo.categorias.contains(categoria)}" type="checkbox" name="categorias">
+			<label th:for="${'categoria-' + categoria.id}">[[ *{nome} ]]</label>
+		</div>
+		<br>
+		<input type="submit" value="Create">
+	</form>
+</body>
+</html>

@@ -2,7 +2,6 @@ package org.java.project.controller;
 
 import java.util.List;
 
-import org.java.project.pojo.Photo;
 import org.java.project.pojo.Question;
 import org.java.project.serv.QuestionService;
 import org.springframework.beans.factory.annotation.Autowired;

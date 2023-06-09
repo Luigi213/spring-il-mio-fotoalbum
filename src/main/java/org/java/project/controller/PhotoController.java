@@ -2,6 +2,8 @@ package org.java.project.controller;
 
 import java.util.List;
 
+import org.java.project.auth.pojo.User;
+import org.java.project.auth.serv.UserService;
 import org.java.project.pojo.Categoria;
 import org.java.project.pojo.Photo;
 import org.java.project.serv.CategoriaService;
@@ -29,6 +31,9 @@ public class PhotoController {
 	@Autowired
 	private CategoriaService categoriaService;
 	
+	@Autowired
+	private UserService userService;
+	
 	@GetMapping
 	public String getIndex(
 			Model model
@@ -54,35 +59,40 @@ public class PhotoController {
 		return "photo-show";
 	}
 	
-	@GetMapping("/create")
-	public String createPhoto(Model model) {
+	@GetMapping("/update/{id}")
+	public String editPizza(
+			Model model,
+			@PathVariable("id") int id
+		) {
 		
 		List<Categoria> categorias = categoriaService.findAll();
 		
-		model.addAttribute("categorias", categorias);
-		model.addAttribute("photo", new Photo());
+		List<User> users = userService.findAll();
 		
-		return "photo-create";
+		model.addAttribute("categorias", categorias);
+		
+		model.addAttribute("users", users);
+
+		Photo photo = photoService.findById(id).get();
+		
+		model.addAttribute("photo", photo);
+		
+		return "photo-update";
 	}
 	
-	@PostMapping("/create")
-	public String storePhoto(
-
+	@PostMapping("/update/{id}")
+	public String updatePizza(
 			Model model,
 			@Valid @ModelAttribute Photo photo,
 			BindingResult bindingResult
-			) {
+		) {
 		
 		if (bindingResult.hasErrors()) {
 			
-			List<Categoria> categorias = categoriaService.findAll();
-			
-			model.addAttribute("categorias", categorias);
-			
-			model.addAttribute("photo", photo);
+			model.addAttribute("pizza", photo);
 			model.addAttribute("errors", bindingResult);
 			
-			return "photo-create";
+			return "photo-update";
 		}
 		
 		photoService.save(photo);

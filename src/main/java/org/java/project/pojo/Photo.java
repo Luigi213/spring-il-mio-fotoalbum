@@ -3,11 +3,18 @@ package org.java.project.pojo;
 import java.util.Arrays;
 import java.util.List;
 
+import org.java.project.auth.pojo.User;
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonSetter;
+
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToMany;
+import jakarta.persistence.ManyToOne;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
 
@@ -30,6 +37,11 @@ public class Photo {
 	@ManyToMany
 	private List<Categoria> categorias;
 	
+	@ManyToOne
+	@JoinColumn(nullable = false)
+	@JsonIgnore
+	private User user;
+	
 	public Photo() {}
 	public Photo(String titolo, String descrizione, String url, boolean visibile, Categoria...categorias) {
 		setTitolo(titolo);
@@ -37,6 +49,16 @@ public class Photo {
 		setUrl(url);
 		setVisibile(visibile);
 		
+		setCategorias(categorias);
+	}
+	
+	public Photo(String titolo, String descrizione, String url, boolean visibile, User user, Categoria...categorias) {
+		setTitolo(titolo);
+		setDescrizione(descrizione);
+		setUrl(url);
+		setVisibile(visibile);
+		
+		setUser(user);
 		setCategorias(categorias);
 	}
 
@@ -73,6 +95,7 @@ public class Photo {
 	public List<Categoria> getCategorias() {
 		return categorias;
 	}
+	@JsonSetter
 	public void setCategorias(List<Categoria> categorias) {
 		this.categorias = categorias;
 	}
@@ -84,5 +107,14 @@ public class Photo {
 	}
 	public void removeCategoria(Categoria categoria) {
 		getCategorias().remove(categoria);
+	}
+	public User getUser() {
+		return user;
+	}
+	public void setUser(User user) {
+		this.user = user;
+	}
+	public void addUser(User user) {
+		setUser(user);
 	}
 }
