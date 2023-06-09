@@ -9,6 +9,10 @@
 		LOGOUT
 	</a>
 	<h1>Lista foto:</h1>
+	<form th:action="@{/photo/by/name}" method="POST">
+		<input type="text" name="name">
+		<input type="submit" value="Search"> 
+	</form>
 	<ul>
 		<li
 			th:each="photo : ${photos}"
