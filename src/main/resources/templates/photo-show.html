@@ -1,0 +1,15 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="ISO-8859-1">
+<title>Insert title here</title>
+</head>
+<body th:object="${photo}">
+	<h1>[[ *{titolo} ]]</h1>
+	<p>[[ *{descrizione} ]]</p>
+	<img th:src="*{url}">
+	<ul th:each="categoria : *{categorias}">
+		<li>[[ ${categoria} ]]</li>
+	</ul>
+</body>
+</html>

@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="ISO-8859-1">
+<title>Insert title here</title>
+</head>
+<body>
+	<h1>Lista richieste:</h1>
+	<ul>
+		<li
+			th:each="question : ${questions}"
+			th:object="${question}"
+		>
+			<a th:href="@{/question/{id} (id=*{id})}">
+				[[ *{email} ]]
+			</a>	
+			<a th:href="@{/question/delete/{id} (id=*{id})}">
+				delete
+			</a>
+		</li>
+	</ul>
+</body>
+</html>

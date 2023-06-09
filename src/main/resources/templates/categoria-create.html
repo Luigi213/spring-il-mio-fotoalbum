@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="ISO-8859-1">
+<title>Insert title here</title>
+</head>
+<body th:object="${categoria}">
+	<h1>Create categoria</h1>
+	<form method="POST">
+		<label>nome</label>
+		<input type="text" name="nome" th:value="*{nome}">
+		<label style="color: red" th:if="${errors != null && errors.hasFieldErrors('nome')}">
+			[[ ${errors.getFieldError('nome').defaultMessage} ]]
+		</label>
+		<input type="submit" value="Create">
+	</form>
+</body>
+</html>

@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="ISO-8859-1">
+<title>Insert title here</title>
+</head>
+<body>
+	<h1>Lista categorie:</h1>
+	<a th:href="@{/categoria/create}">Create categoria</a>
+	<ul>
+		<li
+			th:each="categoria : ${categorias}"
+			th:object="${categoria}"
+		>
+			<a th:href="@{/categoria/{id} (id=*{id})}">
+				[[ *{nome} ]]
+			</a>	
+			<a th:href="@{/categoria/delete/{id} (id=*{id})}">
+				delete
+			</a>
+		</li>
+	</ul>
+</body>
+</html>
