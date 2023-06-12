@@ -61,7 +61,7 @@ public class PhotoController {
 	}
 	
 	@PostMapping("/by/name")
-	public String getNamePizza(Model model, @RequestParam(required = false) String name) {
+	public String getNamePhoto(Model model, @RequestParam(required = false) String name) {
 		
 		List<Photo> photos = photoService.findByTitolo(name);
 		
@@ -71,7 +71,7 @@ public class PhotoController {
 	}
 	
 	@GetMapping("/update/{id}")
-	public String editPizza(
+	public String editPhoto(
 			Model model,
 			@PathVariable("id") int id
 		) {
@@ -92,7 +92,7 @@ public class PhotoController {
 	}
 	
 	@PostMapping("/update/{id}")
-	public String updatePizza(
+	public String updatePhoto(
 			Model model,
 			@Valid @ModelAttribute Photo photo,
 			BindingResult bindingResult
@@ -100,7 +100,7 @@ public class PhotoController {
 		
 		if (bindingResult.hasErrors()) {
 			
-			model.addAttribute("pizza", photo);
+			model.addAttribute("photo", photo);
 			model.addAttribute("errors", bindingResult);
 			
 			return "photo-update";

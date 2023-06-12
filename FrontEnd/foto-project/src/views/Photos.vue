@@ -13,6 +13,6 @@ export default {
         </li>
     </ul>
 </template>
-<style lang="">
-    
+<style lang="scss">
+
 </style>

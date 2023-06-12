@@ -90,7 +90,7 @@ public class CategoriaController {
 	}
 	
 	@GetMapping("/delete/{id}")
-	public String deletePizza(
+	public String deletePhoto(
 			@PathVariable("id") int id
 			) {
 		
