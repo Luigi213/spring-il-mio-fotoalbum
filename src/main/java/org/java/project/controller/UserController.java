@@ -40,7 +40,7 @@ public class UserController {
         String username = authentication.getName();
         List<Photo> userPhotos = userService.getFotosForCurrentUser(username);
         model.addAttribute("photos", userPhotos);
-        return "user-index";
+        return "photo-index";
     }
 	
 	@GetMapping("/photo/{id}")
@@ -55,7 +55,7 @@ public class UserController {
         		model.addAttribute("photo", photo);
         	}
         }
-        return "user-show";
+        return "photo-show";
     }
 	
 	@GetMapping("/photo/create")
@@ -66,7 +66,7 @@ public class UserController {
 		model.addAttribute("categorias", categorias);
 		model.addAttribute("photo", new Photo());
 		
-		return "user-create";
+		return "photo-create";
 	}
 	
 	@PostMapping("/photo/create")
@@ -86,7 +86,7 @@ public class UserController {
 			model.addAttribute("photo", photo);
 			model.addAttribute("errors", bindingResult);
 			
-			return "user-create";
+			return "photo-create";
 		}
 		
 		String username = authentication.getName();

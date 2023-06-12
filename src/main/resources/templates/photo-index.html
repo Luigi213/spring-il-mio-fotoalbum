@@ -9,22 +9,26 @@
 		LOGOUT
 	</a>
 	<h1>Lista foto:</h1>
-	<form th:action="@{/photo/by/name}" method="POST">
+	<form th:action="@{/photo/by/name}" method="POST" sec:authorize="hasAuthority('SUPERADMIN')">
 		<input type="text" name="name">
 		<input type="submit" value="Search"> 
 	</form>
+	<a th:href="@{/amministratori/photo/create}" sec:authorize="hasAuthority('AMMINISTRATORI')">Create photo</a>
 	<ul>
 		<li
 			th:each="photo : ${photos}"
 			th:object="${photo}"
 		>
-			<a th:href="@{/photo/{id} (id=*{id})}">
+			<a th:href="@{/photo/{id} (id=*{id})}" sec:authorize="hasAuthority('SUPERADMIN')">
 				[[ *{titolo} ]]
-			</a>	
-			<a th:href="@{/photo/delete/{id} (id=*{id})}">
+			</a>
+			<a th:href="@{/amministratori/photo/{id} (id=*{id})}" sec:authorize="hasAuthority('AMMINISTRATORI')">
+				[[ *{titolo} ]]
+			</a>		
+			<a th:href="@{/amministratori/photo/delete/{id} (id=*{id})}" sec:authorize="hasAuthority('AMMINISTRATORI')">
 				delete
 			</a>
-			<a th:href="@{/photo/update/{id} (id=*{id})}">
+			<a th:href="@{/photo/update/{id} (id=*{id})}" sec:authorize="hasAuthority('SUPERADMIN')">
 				modifica
 			</a>
 		</li>
